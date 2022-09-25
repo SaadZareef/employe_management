@@ -30,8 +30,8 @@ class _NewEmployeeState extends State<NewEmployee> {
     }
   }
 
-  File? _imagePath;
-  File? _imageName;
+  var _imagePath;
+  var _imageName;
   final imagePicker = ImagePicker();
   Future getImage() async {
     try {
@@ -42,28 +42,39 @@ class _NewEmployeeState extends State<NewEmployee> {
       }
       print(image.runtimeType);
       print(image.name);
+      print(image.path);
       print(image);
       setState(() {
-        _imagePath = File(image.path);
-        _imageName = File('$username.png');
+        _imagePath = image.path;
+        _imageName = image.name;
       });
       print(_imageName);
+      print(_imagePath);
     } on PlatformException catch (e) {
       print('Failed to pick image');
     }
   }
 
   Future uploadFile() async {
-    final path = 'files/${_imageName}';
-    final file = _imagePath;
-    final ref = await FirebaseStorage.instance.ref().child(path);
-    ref.putFile(file!);
+    File file = File(_imagePath);
+    final ref =
+        await FirebaseStorage.instance.ref('files/$_imageName').putFile(file);
+    print('Upload file:  $ref');
   }
 
-  Future downloadFile() async {
-    String downloadURL = await FirebaseStorage.instance
-        .ref('files/$_imageName')
-        .getDownloadURL();
+  Future<String> downloadFileURL() async {
+    Reference reference = FirebaseStorage.instance.ref('files/$_imageName');
+    final TaskSnapshot snapshot = await reference.putFile(File(_imagePath));
+    final downloadURL = await snapshot.ref.getDownloadURL();
+    // final downloadURL =
+    // await FirebaseStorage.instance
+    //     .ref('files/$_imageName')
+    //     .getDownloadURL();
+    // await FirebaseStorage.instance
+    // .ref('files/$_imageName')
+    // .putFile(File(_imagePath));
+
+    print('Download file:   $downloadURL');
     return downloadURL;
   }
 
@@ -176,6 +187,7 @@ class _NewEmployeeState extends State<NewEmployee> {
             ),
             username != '' && profession != '' && salary != '' && gender != ''
                 ? Button(
+                    downloadFileURL: downloadFileURL,
                     uploadFile: uploadFile,
                     btn: 'Add Employee',
                     username: username,

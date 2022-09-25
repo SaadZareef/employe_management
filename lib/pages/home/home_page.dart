@@ -51,8 +51,13 @@ class _HomeState extends State<Home> {
             return Text('Something Went Wrong');
           } else if (snapshot.hasData) {
             final employees = snapshot.data;
+
             return ListView(
-              children: employees!.map(buildEmploye).toList(),
+              children: employees!
+                  .map((employe) => buildEmploye(
+                        employee: employe,
+                      ))
+                  .toList(),
             );
           } else {
             return Center(

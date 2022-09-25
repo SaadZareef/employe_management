@@ -3,6 +3,8 @@ import 'package:practice/Services/firestore.dart';
 import 'package:practice/model/employee_data.dart';
 import 'package:practice/pages/new_employe/new_employe_page.dart';
 
+String url2 = '';
+
 class Button extends StatefulWidget {
   String btn;
   TextEditingController username;
@@ -10,9 +12,11 @@ class Button extends StatefulWidget {
   TextEditingController salary;
   String gender;
   Function uploadFile;
+  Function downloadFileURL;
   Button({
     Key? key,
     required this.uploadFile,
+    required this.downloadFileURL,
     required this.btn,
     required this.username,
     required this.profession,
@@ -26,12 +30,15 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
+    String url1;
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         DatabaseService().creatUser(widget.username.text,
             widget.profession.text, widget.salary.text, widget.gender);
         Navigator.pop(context);
         widget.uploadFile();
+        url1 = await widget.downloadFileURL();
+        url2 = url1;
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.indigo,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:practice/Services/auth.dart';
-import 'package:practice/Services/firestore.dart';
 import 'package:practice/widgets/loading.dart';
 
 class RegisterPage extends StatefulWidget {
