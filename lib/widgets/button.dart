@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:practice/Services/firestore.dart';
-import 'package:practice/model/employee_data.dart';
-import 'package:practice/pages/new_employe/new_employe_page.dart';
-
-String url2 = '';
+import 'package:practice/constants/mediaquery.dart';
 
 class Button extends StatefulWidget {
   String btn;
@@ -30,21 +28,24 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
-    String url1;
     return ElevatedButton(
       onPressed: () async {
-        DatabaseService().creatUser(widget.username.text,
-            widget.profession.text, widget.salary.text, widget.gender);
+        DatabaseService().creatUser(
+            widget.username.text,
+            widget.profession.text,
+            widget.salary.text,
+            widget.gender,
+            await widget.downloadFileURL());
         Navigator.pop(context);
         widget.uploadFile();
-        url1 = await widget.downloadFileURL();
-        url2 = url1;
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
-        fixedSize: Size(200, 30),
-        shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        fixedSize: Size(900.w, 180.h),
+        shape: BeveledRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(context.portrait ? 60.r : 100.r)),
       ),
       child: Text('Add Employee',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),

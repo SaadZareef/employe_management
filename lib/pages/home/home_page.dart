@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:practice/Services/auth.dart';
+import 'package:practice/constants/mediaquery.dart';
 import 'package:practice/model/employee_data.dart';
 import 'package:practice/pages/new_employe/new_employe_page.dart';
 import 'package:practice/widgets/employee_list.dart';
@@ -22,9 +24,9 @@ class _HomeState extends State<Home> {
       .snapshots()
       .map((snapshots) =>
           snapshots.docs.map((doc) => Employee.fromJson(doc.data())).toList());
+
   Widget build(BuildContext context) {
     final user = Provider.of<Users?>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
@@ -38,7 +40,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               Icons.logout,
               color: Colors.white,
-              size: 25,
+              size: context.portrait ? 110.sp : 60.sp,
             ),
           ),
         ],
@@ -52,12 +54,15 @@ class _HomeState extends State<Home> {
           } else if (snapshot.hasData) {
             final employees = snapshot.data;
 
-            return ListView(
-              children: employees!
-                  .map((employe) => buildEmploye(
-                        employee: employe,
-                      ))
-                  .toList(),
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              child: ListView(
+                children: employees!
+                    .map((employe) => buildEmploye(
+                          employee: employe,
+                        ))
+                    .toList(),
+              ),
             );
           } else {
             return Center(
@@ -69,7 +74,8 @@ class _HomeState extends State<Home> {
       floatingActionButton: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.indigo,
-          fixedSize: Size(200, 40),
+          fixedSize:
+              context.portrait ? Size(1000.w, 150.h) : Size(700.w, 150.h),
           shape: BeveledRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

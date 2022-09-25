@@ -4,10 +4,10 @@ class Employee {
   final String profession;
   final String salary;
   final String gender;
-  // final String image;
+  final String image;
   Employee(
       {this.id = '',
-      // this.image = '',
+      required this.image,
       required this.name,
       required this.profession,
       required this.salary,
@@ -15,7 +15,7 @@ class Employee {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        // 'image': image,
+        'image': image,
         'name': name,
         'profession': profession,
         'salary': salary,
@@ -24,7 +24,7 @@ class Employee {
 
   static Employee fromJson(Map<String, dynamic> json) => Employee(
         id: json['id'],
-        // image: json['image'],
+        image: json['image'],
         name: json['name'],
         profession: json['profession'],
         salary: json['salary'],

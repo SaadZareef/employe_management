@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:practice/Services/auth.dart';
 import 'package:practice/model/user_data.dart';
 import 'package:practice/pages/wrapper.dart';
@@ -17,8 +18,11 @@ class MyApp extends StatelessWidget {
     return StreamProvider<Users?>.value(
       value: AuthService().user,
       initialData: null,
-      child: MaterialApp(
-        home: Wrapper(),
+      child: ScreenUtilInit(
+        designSize: Size(1440, 3040),
+        builder: (context, child) => MaterialApp(
+          home: Wrapper(),
+        ),
       ),
     );
   }
