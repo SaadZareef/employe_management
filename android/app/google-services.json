@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "315850531518",
+    "project_id": "employee-c6feb",
+    "storage_bucket": "employee-c6feb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315850531518:android:8276b11d4534815b5e74ef",
+        "android_client_info": {
+          "package_name": "com.practice.employee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315850531518-kcj581lmi561dukador4mmkmktc7ft2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlOmKbD2ol96ws0nNAj9ljCyJjOiGji2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315850531518-kcj581lmi561dukador4mmkmktc7ft2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
