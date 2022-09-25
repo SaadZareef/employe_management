@@ -14,6 +14,7 @@ class _EmployeeDetailsState extends State<EmployeeDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.indigo,
         title: Text('Employee Details'),
         centerTitle: true,
       ),
@@ -24,7 +25,7 @@ class _EmployeeDetailsState extends State<EmployeeDetails> {
           child: Column(
             children: [
               Container(
-                height: 250,
+                height: 230,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius:
@@ -50,7 +51,10 @@ class _EmployeeDetailsState extends State<EmployeeDetails> {
                 child: Text(
                   lorem(paragraphs: 1, words: 30),
                   style: TextStyle(
-                      fontSize: 15, color: Color.fromARGB(255, 97, 97, 97)),
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 97, 97, 97),
+                    fontFamily: 'OpenSans',
+                  ),
                 ),
               ),
             ],
